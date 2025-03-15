@@ -1,0 +1,6 @@
+@AFF_back_HostAddress = http://localhost:5171
+
+GET {{AFF_back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

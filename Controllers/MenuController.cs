@@ -1,0 +1,111 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using AFF_back;
+using System.Security.Claims;
+
+namespace AFF_back.Controllers
+{
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
+    public class MenuController : ControllerBase
+    {
+        private readonly AppDbContext _db;
+        public MenuController(AppDbContext db)
+        {
+            _db = db;
+        }
+
+        [HttpGet("principal")]
+        public async Task<IActionResult> GetMenuPrincipal()
+        {
+            var idClaim = User.FindFirst("IdUsuario")?.Value;
+            // Log temporal (puedes usar un logger o retornar este dato para depuración)
+            System.Diagnostics.Debug.WriteLine("Claim IdUsuario: " + idClaim);
+
+            // Extraemos el IdUsuario del token (asegúrate de que la claim se llame exactamente "IdUsuario")
+            if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
+            {
+                return Unauthorized("No se pudo extraer el usuario.");
+            }
+
+            // Obtener los favoritos del usuario logueado usando la entidad UsuarioFavoritos
+            var favoritos = await _db.UsuarioFavoritos
+                .Where(fav => fav.IdUsuario == idUsuario)
+                .Include(fav => fav.Vendedor)
+                .Select(fav => new
+                {
+                    vendedorId = fav.Vendedor.IdUsuario,
+                    nombre = fav.Vendedor.Nombres + " " + fav.Vendedor.Apellidos,
+                    imagenPerfil = fav.Vendedor.ImagenPerfil,
+                    descripcion = fav.Vendedor.Descripcion,
+                    // Datos del último producto en venta del vendedor
+                    productoVenta = _db.Productos
+                        .Where(p => p.IdUsuario == fav.Vendedor.IdUsuario && p.Activo)
+                        .OrderByDescending(p => p.FechaRegistro)
+                        .Select(p => new
+                        {
+                            p.Nombre,
+                            p.Descripcion,
+                            p.Precio,
+                            p.RutaImagen,
+                            p.NombreImagen
+                        }).FirstOrDefault(),
+                    // Datos del último producto en subasta del vendedor, manejando FechaFin de forma segura
+                    productoSubasta = _db.Productos
+                        .Where(p => p.IdUsuario == fav.Vendedor.IdUsuario && p.Activo)
+                        .OrderByDescending(p => p.FechaRegistro)
+                        .Select(p => new
+                        {
+                            p.Nombre,
+                            p.Descripcion,
+                            p.Precio,
+                            p.RutaImagen,
+                            p.NombreImagen,
+                            FechaFin = p.FechaFin.HasValue ? p.FechaFin.Value : (DateTime?)null
+                        }).FirstOrDefault()
+                }).ToListAsync();
+
+            // Extraer los Ids de vendedores favoritos para excluirlos de sugerencias
+            var favoritosIds = favoritos.Select(f => f.vendedorId).ToList();
+            // Obtener sugerencias: vendedores de Nivel=2 que no sean el usuario logueado y que no estén en favoritos
+            var sugerencias = await _db.Usuarios
+                .Where(u => u.IdUsuario != idUsuario && u.Nivel == 2 && !favoritosIds.Contains(u.IdUsuario))
+                .OrderBy(r => Guid.NewGuid())
+                .Take(3)
+                .Select(u => new {
+                    vendedorId = u.IdUsuario,
+                    nombre = u.Nombres + " " + u.Apellidos,
+                    imagenPerfil = u.ImagenPerfil
+                })
+                .ToListAsync();
+
+            var result = new
+            {
+                favoritos = favoritos,
+                sugerencias = sugerencias
+            };
+
+            return Ok(result);
+        }
+
+        [HttpGet("categorias")]
+        public async Task<IActionResult> GetCategorias()
+        {
+            var categorias = await _db.Categorias
+                .Take(200)
+                .Select(c => new
+                {
+                    id = c.IdCategoria,
+                    descripcion = c.Descripcion,
+                    activo = c.Activo,
+                    fechaRegistro = c.FechaRegistro
+                })
+                .ToListAsync();
+
+            return Ok(categorias);
+        }
+
+    }
+}
