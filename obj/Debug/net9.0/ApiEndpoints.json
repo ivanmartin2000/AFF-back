@@ -84,6 +84,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AFF_back.Controllers.DashboardController",
+    "Method": "GetDashboardMetrics",
+    "RelativePath": "api/Dashboard/metrics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AFF_back.Controllers.EnviosController",
     "Method": "GetEnviosRealizados",
     "RelativePath": "api/Envios/realizados",
