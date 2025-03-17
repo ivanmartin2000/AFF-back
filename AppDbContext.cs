@@ -20,6 +20,7 @@ public class AppDbContext : DbContext
     // Nuevo DbSet para envíos
     public DbSet<Envio> Envios { get; set; } = null!;
     public DbSet<Carrito> Carritos { get; set; } = null!;
+    public DbSet<Marca> Marcas { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -174,7 +175,18 @@ public class AppDbContext : DbContext
                   .HasForeignKey(e => e.IdUsuarioComprador)
                   .OnDelete(DeleteBehavior.Restrict);
         });
-
+        // ----------------- MARCA -----------------
+        modelBuilder.Entity<Marca>(entity =>
+        {
+            entity.ToTable("MARCA");
+            entity.HasKey(e => e.IdMarca);
+            entity.Property(e => e.Descripcion)
+                  .IsRequired()
+                  .HasMaxLength(200);
+            entity.Property(e => e.Activo).IsRequired();
+            entity.Property(e => e.FechaRegistro)
+                  .HasColumnType("datetime");
+        });
         // ----------------- ENVIO -----------------
         modelBuilder.Entity<Envio>(entity =>
         {

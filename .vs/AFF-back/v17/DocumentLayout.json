@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:marca.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\marcascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\marcascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\transaccionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\transaccionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,10 +43,6 @@
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\subastascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\billeteracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\billeteracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -45,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\aff-back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:aff-back.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\loginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +95,6 @@
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:envio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|c:\\users\\ivan\\desktop\\proyectoaff\\aff-back\\controllers\\productospublicadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B174AD85-C7DC-4302-9095-97D9063A5833}|AFF-back.csproj|solutionrelative:controllers\\productospublicadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -118,17 +126,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\AppDbContext.cs",
               "RelativeDocumentMoniker": "AppDbContext.cs",
               "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\AppDbContext.cs",
               "RelativeToolTip": "AppDbContext.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAywBsAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAswLoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-08T02:12:14.212Z",
               "IsPinned": true,
@@ -136,20 +144,120 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "MarcasController.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\MarcasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MarcasController.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\MarcasController.cs",
+              "RelativeToolTip": "Controllers\\MarcasController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T19:16:51.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SubastasController.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\SubastasController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SubastasController.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\SubastasController.cs",
+              "RelativeToolTip": "Controllers\\SubastasController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAcwB8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T22:08:51.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "BilleteraController.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\BilleteraController.cs",
+              "RelativeDocumentMoniker": "Controllers\\BilleteraController.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\BilleteraController.cs",
+              "RelativeToolTip": "Controllers\\BilleteraController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAswCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T06:22:22.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Carrito.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Carrito.cs",
+              "RelativeDocumentMoniker": "Carrito.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Carrito.cs",
+              "RelativeToolTip": "Carrito.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T06:27:50.329Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAUwBgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T04:00:54.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Marca.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Marca.cs",
+              "RelativeDocumentMoniker": "Marca.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Marca.cs",
+              "RelativeToolTip": "Marca.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-17T19:20:20.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "TransaccionesController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\TransaccionesController.cs",
               "RelativeDocumentMoniker": "Controllers\\TransaccionesController.cs",
               "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\TransaccionesController.cs",
               "RelativeToolTip": "Controllers\\TransaccionesController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAUwDsAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAUwDwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-17T06:53:17.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 6,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Producto.cs",
+              "RelativeDocumentMoniker": "Producto.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Producto.cs",
+              "RelativeToolTip": "Producto.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-16T21:43:08.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProductosController.cs",
+              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ProductosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductosController.cs",
+              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ProductosController.cs",
+              "RelativeToolTip": "Controllers\\ProductosController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAcwC8AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-15T22:29:50.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "20250315135227_AgregarTarjetaYDireccionUsuario.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Migrations\\20250315135227_AgregarTarjetaYDireccionUsuario.cs",
               "RelativeDocumentMoniker": "Migrations\\20250315135227_AgregarTarjetaYDireccionUsuario.cs",
@@ -161,59 +269,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SubastasController.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\SubastasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\SubastasController.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\SubastasController.cs",
-              "RelativeToolTip": "Controllers\\SubastasController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAcwB8AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T22:08:51.612Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BilleteraController.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\BilleteraController.cs",
-              "RelativeDocumentMoniker": "Controllers\\BilleteraController.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\BilleteraController.cs",
-              "RelativeToolTip": "Controllers\\BilleteraController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAswCkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T06:22:22.938Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Carrito.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Carrito.cs",
-              "RelativeDocumentMoniker": "Carrito.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Carrito.cs",
-              "RelativeToolTip": "Carrito.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T06:27:50.329Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Producto.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Producto.cs",
-              "RelativeDocumentMoniker": "Producto.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Producto.cs",
-              "RelativeToolTip": "Producto.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAgwBYAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T21:43:08.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "AFF-back.csproj",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\AFF-back.csproj",
               "RelativeDocumentMoniker": "AFF-back.csproj",
@@ -221,12 +277,11 @@
               "RelativeToolTip": "AFF-back.csproj",
               "ViewState": "AgIAAAUAAAAAAAAAAAAgwBIAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-03-17T02:43:20.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T02:43:20.429Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "CarritoController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\CarritoController.cs",
               "RelativeDocumentMoniker": "Controllers\\CarritoController.cs",
@@ -234,12 +289,11 @@
               "RelativeToolTip": "Controllers\\CarritoController.cs",
               "ViewState": "AgIAAC0AAAAAAAAAAADwvz8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T06:29:41.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T06:29:41.122Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "LoginResponse.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\LoginResponse.cs",
               "RelativeDocumentMoniker": "LoginResponse.cs",
@@ -247,12 +301,11 @@
               "RelativeToolTip": "LoginResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T03:59:54.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T03:59:54.19Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "UsuarioController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\UsuarioController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsuarioController.cs",
@@ -260,12 +313,11 @@
               "RelativeToolTip": "Controllers\\UsuarioController.cs",
               "ViewState": "AgIAAH8AAAAAAAAAAADwv5MAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T23:43:55.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T23:43:55.282Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "LoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\LoginRequest.cs",
               "RelativeDocumentMoniker": "LoginRequest.cs",
@@ -273,12 +325,11 @@
               "RelativeToolTip": "LoginRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T03:59:56.066Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T03:59:56.066Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "MenuController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\MenuController.cs",
               "RelativeDocumentMoniker": "Controllers\\MenuController.cs",
@@ -286,12 +337,11 @@
               "RelativeToolTip": "Controllers\\MenuController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAA9wG8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T05:35:51.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T05:35:51.702Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -299,25 +349,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAABcAAAAAAAAAAADgvx0AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T04:01:56.105Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T04:01:56.105Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAgwDQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-17T04:00:54.959Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -329,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -337,12 +373,11 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-17T02:40:56.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-17T02:40:56.26Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "EnviosController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\EnviosController.cs",
               "RelativeDocumentMoniker": "Controllers\\EnviosController.cs",
@@ -354,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Envio.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Envio.cs",
               "RelativeDocumentMoniker": "Envio.cs",
@@ -366,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 25,
               "Title": "Puja.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Puja.cs",
               "RelativeDocumentMoniker": "Puja.cs",
@@ -378,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "PujaController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\PujaController.cs",
               "RelativeDocumentMoniker": "Controllers\\PujaController.cs",
@@ -390,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -402,19 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ProductosController.cs",
-              "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ProductosController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ProductosController.cs",
-              "ToolTip": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ProductosController.cs",
-              "RelativeToolTip": "Controllers\\ProductosController.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAwCMAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-15T22:29:50.721Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "ProductosPublicadosController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ProductosPublicadosController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductosPublicadosController.cs",
@@ -426,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 28,
               "Title": "Venta.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Venta.cs",
               "RelativeDocumentMoniker": "Venta.cs",
@@ -438,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 27,
               "Title": "ComprasController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\ComprasController.cs",
               "RelativeDocumentMoniker": "Controllers\\ComprasController.cs",
@@ -450,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 26,
               "Title": "VentasController.cs",
               "DocumentMoniker": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\Controllers\\VentasController.cs",
               "RelativeDocumentMoniker": "Controllers\\VentasController.cs",
