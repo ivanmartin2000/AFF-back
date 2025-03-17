@@ -5,7 +5,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // Agrega tus DbSet
+    // DbSet existentes
     public DbSet<Venta> Ventas { get; set; } = null!;
     public DbSet<DetalleVenta> DetalleVentas { get; set; } = null!;
     public DbSet<Usuario> Usuarios { get; set; } = null!;
@@ -15,6 +15,10 @@ public class AppDbContext : DbContext
     public DbSet<Categoria> Categorias { get; set; } = null!;
     public DbSet<Tarjeta> Tarjetas { get; set; } = null!;
     public DbSet<DireccionUsuario> DireccionesUsuario { get; set; } = null!;
+    public DbSet<Puja> Pujas { get; set; } = null!;
+
+    // Nuevo DbSet para envíos
+    public DbSet<Envio> Envios { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -84,7 +88,8 @@ public class AppDbContext : DbContext
                   .IsRequired()
                   .HasMaxLength(200);
             entity.Property(e => e.Activo).IsRequired();
-            entity.Property(e => e.FechaRegistro).HasColumnType("datetime");
+            entity.Property(e => e.FechaRegistro)
+                  .HasColumnType("datetime");
         });
 
         // ----------------- TARJETA -----------------
@@ -121,14 +126,10 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Venta>(entity =>
         {
             entity.ToTable("VENTA");
-            entity.HasKey(e => e.IdVenta); // Indica que IdVenta es la PK
-
-            // Ejemplo de mapeo de columnas adicionales, si lo requieres:
-            // entity.Property(e => e.MontoTotal).HasPrecision(18, 2);
-
-            // Si IdCliente referencia un usuario (en lugar de la tabla CLIENTE):
+            entity.HasKey(e => e.IdVenta);
+            // Si IdCliente referencia USUARIO:
             entity.HasOne(e => e.Usuario)
-                  .WithMany() // o con una colección en Usuario si deseas
+                  .WithMany()
                   .HasForeignKey(e => e.IdCliente)
                   .OnDelete(DeleteBehavior.Restrict);
         });
@@ -146,8 +147,36 @@ public class AppDbContext : DbContext
                   .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.Producto)
-                  .WithMany() // o define una colección en Producto
+                  .WithMany() // Puedes definir una colección en Producto si lo necesitas
                   .HasForeignKey(e => e.IdProducto)
+                  .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        // ----------------- PUJA -----------------
+        modelBuilder.Entity<Puja>(entity =>
+        {
+            entity.ToTable("PUJA");
+            entity.HasKey(e => e.IdPuja);
+            entity.Property(e => e.Monto).HasPrecision(18, 2);
+            entity.Property(e => e.FechaPuja).HasColumnType("datetime");
+
+            entity.HasOne(e => e.UsuarioComprador)
+                  .WithMany()
+                  .HasForeignKey(e => e.IdUsuarioComprador)
+                  .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        // ----------------- ENVIO -----------------
+        modelBuilder.Entity<Envio>(entity =>
+        {
+            entity.ToTable("ENVIO");
+            entity.HasKey(e => e.IdEnvio);
+            entity.Property(e => e.EstadoEnvio).IsRequired();
+            entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
+
+            entity.HasOne(e => e.Venta)
+                  .WithOne() // Se asume que cada venta tiene un único envío
+                  .HasForeignKey<Envio>(e => e.IdVenta)
                   .OnDelete(DeleteBehavior.Restrict);
         });
     }

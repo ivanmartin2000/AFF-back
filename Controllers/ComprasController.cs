@@ -16,13 +16,14 @@ namespace AFF_back.Controllers
         {
             _db = db;
         }
-
+        [Authorize]
         [HttpGet("productos-comprados")]
         public async Task<IActionResult> GetProductosComprados()
         {
             if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
                 return Unauthorized("No se pudo extraer el usuario.");
 
+            // Aquí se asume que IdCliente en VENTA representa al comprador.
             var productosComprados = await (
                 from venta in _db.Ventas
                 where venta.IdCliente == idUsuario

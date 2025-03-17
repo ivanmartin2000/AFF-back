@@ -194,6 +194,26 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AFF_back.Controllers.EnviosController",
+    "Method": "GetEnviosRealizados",
+    "RelativePath": "api/Envios/realizados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.EnviosController",
+    "Method": "GetEnviosRecibidos",
+    "RelativePath": "api/Envios/recibidos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AFF_back.Controllers.MenuController",
     "Method": "GetCategorias",
     "RelativePath": "api/Menu/categorias",
@@ -214,39 +234,178 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "AFF_back.Controllers.PerfilController",
-    "Method": "GetDatosUsuario",
-    "RelativePath": "api/Perfil/datos-usuario",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.UsuariosController",
-    "Method": "GetPerfilUsuario",
-    "RelativePath": "api/Usuarios/perfil",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.UsuariosController",
-    "Method": "Registro",
-    "RelativePath": "api/Usuarios/registro",
+    "ContainingType": "AFF_back.Controllers.ProductosController",
+    "Method": "PublicarProducto",
+    "RelativePath": "api/Productos/publicar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "AFF_back.Controllers.RegistroRequest",
+        "Type": "AFF_back.Controllers.PublicarProductoRequest",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.ProductosPublicadosController",
+    "Method": "GetProductosPublicados",
+    "RelativePath": "api/ProductosPublicados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.PujaController",
+    "Method": "RealizarPuja",
+    "RelativePath": "api/Puja/realizar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AFF_back.Controllers.PujarRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.SubastasController",
+    "Method": "GetSubastasCanceladas",
+    "RelativePath": "api/Subastas/canceladas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.SubastasController",
+    "Method": "CancelarSubastasExpiradas",
+    "RelativePath": "api/Subastas/cancelar-expiradas",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.SubastasController",
+    "Method": "GetProductosSubasta",
+    "RelativePath": "api/Subastas/publicados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.UploadController",
+    "Method": "SubirImagen",
+    "RelativePath": "api/Upload/imagen",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ContentType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContentDisposition",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Headers",
+        "Type": "Microsoft.AspNetCore.Http.IHeaderDictionary",
+        "IsRequired": false
+      },
+      {
+        "Name": "Length",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "FileName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.UsuarioController",
+    "Method": "GetDatosUsuario",
+    "RelativePath": "api/Usuario/datos-usuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.UsuarioController",
+    "Method": "GetPerfilPublico",
+    "RelativePath": "api/Usuario/perfil-publico/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.UsuariosController",
+    "Method": "GetDatosUsuario",
+    "RelativePath": "api/Usuarios/datos-usuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.UsuariosController",
+    "Method": "GetPerfilPublico",
+    "RelativePath": "api/Usuarios/perfil-publico/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "VentasController",
+    "Method": "GetProductosVendidos",
+    "RelativePath": "api/Ventas/productos-vendidos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

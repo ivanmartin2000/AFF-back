@@ -4902,11 +4902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\All For Fans\\AFF-back\\AFF-back.csproj",
+      "projectUniqueName": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\AFF-back.csproj",
       "projectName": "AFF-back",
-      "projectPath": "C:\\Users\\Ivan\\Desktop\\All For Fans\\AFF-back\\AFF-back.csproj",
+      "projectPath": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\AFF-back.csproj",
       "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ivan\\Desktop\\All For Fans\\AFF-back\\obj\\",
+      "outputPath": "C:\\Users\\Ivan\\Desktop\\ProyectoAFF\\AFF-back\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

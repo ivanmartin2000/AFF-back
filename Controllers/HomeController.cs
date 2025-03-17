@@ -1,102 +1,129 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AFF_back;
+using System.Security.Claims;
 
 namespace AFF_back.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsuariosController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
         private readonly AppDbContext _db;
-        public UsuariosController(AppDbContext db)
+
+        public UsuarioController(AppDbContext db)
         {
-            _db = db;
+            _db = db ?? throw new ArgumentNullException(nameof(db));
         }
 
-        [HttpPost("registro")]
-        public async Task<IActionResult> Registro([FromBody] RegistroRequest request)
-        {
-            // Verificar si ya existe un usuario con el mismo correo
-            var usuarioExistente = await _db.Usuarios.FirstOrDefaultAsync(u => u.Correo == request.Correo);
-            if (usuarioExistente != null)
-            {
-                return BadRequest("El correo ya está registrado.");
-            }
-
-            // Crear nuevo usuario
-            var nuevoUsuario = new Usuario
-            {
-                Nombres = request.Nombre,
-                Apellidos = request.Apellido,
-                Correo = request.Correo,
-                Clave = request.Clave, // Idealmente deberías aplicar hash a la contraseña
-                Activo = true,
-                Resetear = false,
-                FechaRegistro = DateTime.UtcNow,
-                // Si es creador de contenido, asignamos Nivel 2; de lo contrario, Nivel 3 (por ejemplo)
-                Nivel = request.EsCreador ? 2 : 3,
-                Descripcion = request.Descripcion, // Opcional, puede venir del formulario
-                ImagenPerfil = null // Se cargará en otro momento
-            };
-
-            // Aquí podrías guardar también datos extra de creador (p.ej., SocialAccount) en otra tabla o en campos adicionales
-            // según la lógica de tu aplicación.
-
-            _db.Usuarios.Add(nuevoUsuario);
-            await _db.SaveChangesAsync();
-
-            // Retornamos CreatedAtAction (puedes modificar la respuesta según convenga)
-            return CreatedAtAction(nameof(Registro), new { id = nuevoUsuario.IdUsuario }, nuevoUsuario);
-        }
-
-        // Nuevo endpoint para obtener el perfil del usuario logueado
+        // Endpoint para obtener los datos privados del usuario logueado
         [Authorize]
-        [HttpGet("perfil")]
-        public async Task<IActionResult> GetPerfilUsuario()
+        [HttpGet("datos-usuario")]
+        public async Task<IActionResult> GetDatosUsuario()
         {
-            // Extraer el IdUsuario del token
             if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
-            {
                 return Unauthorized("No se pudo extraer el usuario.");
-            }
 
-            // Buscar el usuario en la base de datos y proyectar los datos deseados
             var usuario = await _db.Usuarios
                 .Where(u => u.IdUsuario == idUsuario)
                 .Select(u => new
                 {
                     u.IdUsuario,
-                    u.Nombres,
-                    u.Apellidos,
+                    NombreCompleto = u.Nombres + " " + u.Apellidos,
                     u.Correo,
                     u.ImagenPerfil,
-                    u.Descripcion,
-                    u.Nivel,
-                    u.FechaRegistro
+                    u.Descripcion
                 })
                 .FirstOrDefaultAsync();
 
             if (usuario == null)
+                return NotFound("Usuario no encontrado.");
+
+            var direcciones = await _db.DireccionesUsuario
+                .Where(d => d.IdUsuario == idUsuario)
+                .Select(d => new {
+                    d.IdDireccion,
+                    d.Calle,
+                    d.Numero,
+                    d.IdDistrito
+                })
+                .ToListAsync();
+
+            var tarjetas = await _db.Tarjetas
+                .Where(t => t.IdUsuario == idUsuario)
+                .Select(t => new {
+                    t.IdTarjeta,
+                    t.NumeroTarjeta,
+                    t.Titular,
+                    t.FechaExpiracion,
+                    t.TipoTarjeta
+                })
+                .ToListAsync();
+
+            return Ok(new
             {
-                return NotFound("Perfil no encontrado.");
-            }
-
-            return Ok(usuario);
+                Usuario = usuario,
+                Direcciones = direcciones,
+                Tarjetas = tarjetas
+            });
         }
-    }
 
-    public class RegistroRequest
-    {
-        public string Nombre { get; set; } = null!;
-        public string Apellido { get; set; } = null!;
-        public string Correo { get; set; } = null!;
-        public string Clave { get; set; } = null!;
-        public bool EsCreador { get; set; }
-        // Campo para la cuenta verificada de una red social (Instagram, X, Twitch, YouTube, etc.)
-        public string? SocialAccount { get; set; }
-        // Opcional, si deseas almacenar alguna descripción adicional (por ejemplo, información del creador)
-        public string? Descripcion { get; set; }
+        // Endpoint para obtener el perfil público de un usuario
+        [HttpGet("perfil-publico/{id}")]
+        public async Task<IActionResult> GetPerfilPublico(int id)
+        {
+            var usuario = await _db.Usuarios
+                .Where(u => u.IdUsuario == id)
+                .Select(u => new
+                {
+                    u.IdUsuario,
+                    NombreCompleto = u.Nombres + " " + u.Apellidos,
+                    u.Correo,
+                    u.ImagenPerfil,
+                    u.Descripcion
+                })
+                .FirstOrDefaultAsync();
+
+            if (usuario == null)
+                return NotFound("Usuario no encontrado.");
+
+            var subastas = await _db.Productos
+                .Where(p => p.IdUsuario == id
+                            && p.Activo
+                            && p.FechaFin.HasValue
+                            && p.FechaFin.Value > DateTime.UtcNow)
+                .Select(p => new {
+                    p.IdProducto,
+                    p.Nombre,
+                    p.Descripcion,
+                    p.Precio,
+                    p.FechaFin,
+                    p.RutaImagen,
+                    p.NombreImagen
+                })
+                .ToListAsync();
+
+            var ventas = await _db.Productos
+                .Where(p => p.IdUsuario == id
+                            && p.Activo
+                            && !p.FechaFin.HasValue)
+                .Select(p => new {
+                    p.IdProducto,
+                    p.Nombre,
+                    p.Descripcion,
+                    p.Precio,
+                    p.FechaRegistro,
+                    p.RutaImagen,
+                    p.NombreImagen
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                Usuario = usuario,
+                Subastas = subastas,
+                Ventas = ventas
+            });
+        }
     }
 }
