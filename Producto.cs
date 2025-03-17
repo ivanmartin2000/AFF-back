@@ -20,5 +20,6 @@
 
         // Propiedad de navegación
         public Usuario Usuario { get; set; } = null!;
+        public string TipoPublicacion { get;  set; }
     }
 }

@@ -19,9 +19,18 @@ public class AppDbContext : DbContext
 
     // Nuevo DbSet para envíos
     public DbSet<Envio> Envios { get; set; } = null!;
+    public DbSet<Carrito> Carritos { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // ----------------- CARRITO -----------------
+        modelBuilder.Entity<Carrito>(entity =>
+        {
+            entity.ToTable("CARRITO");
+            entity.HasKey(e => e.IdCarrito);
+            // Aquí podrías agregar propiedades adicionales o configuraciones de columna si lo requieres.
+        });
+
         base.OnModelCreating(modelBuilder);
 
         // ----------------- USUARIO -----------------

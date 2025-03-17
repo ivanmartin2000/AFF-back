@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AFF_back;
 
 namespace AFF_back.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CarritoController : Controller
+    public class CarritoController : ControllerBase
     {
         private readonly AppDbContext _db;
         public CarritoController(AppDbContext db)
@@ -14,128 +16,53 @@ namespace AFF_back.Controllers
             _db = db;
         }
 
-        [HttpPost("productosComprados")]
-        public async Task<IActionResult> ProductosComprados([FromBody] ProductosCompradosRequest request)
+        // GET: api/carrito/usuario/{idUsuario}
+        [HttpGet("usuario/{idUsuario}")]
+        public async Task<IActionResult> GetCarritoByUser(int idUsuario)
         {
-            // Verificar si ya existe un usuario con el mismo correo
-            var usuarioExistente = await _db.Usuarios.FirstOrDefaultAsync(u => u.Correo == request.Correo);
-            if (usuarioExistente != null)
+            var items = await _db.Carritos
+                .Where(c => c.IdCliente == idUsuario)
+                .Select(c => new
+                {
+                    c.IdCarrito,
+                    c.IdProducto,
+                    c.Cantidad
+                })
+                .ToListAsync();
+
+            return Ok(items);
+        }
+
+        // POST: api/carrito/agregar
+        [HttpPost("agregar")]
+        public async Task<IActionResult> AgregarAlCarrito([FromBody] CarritoRequest request)
+        {
+            if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
+                return Unauthorized("No se pudo extraer el usuario.");
+
+            var existingItem = await _db.Carritos.FirstOrDefaultAsync(c => c.IdCliente == idUsuario && c.IdProducto == request.IdProducto);
+            if (existingItem != null)
             {
-                return BadRequest("El correo ya está registrado.");
+                existingItem.Cantidad += request.Cantidad;
             }
-
-            // Crear nuevo usuario
-            var nuevoUsuario = new Usuario
+            else
             {
-                Nombres = request.Nombre,
-                Apellidos = request.Apellido,
-                Correo = request.Correo,
-                Clave = request.Clave, // Idealmente deberías aplicar hash a la contraseña
-                Activo = true,
-                Resetear = false,
-                FechaRegistro = DateTime.UtcNow,
-                // Si es creador de contenido, asignamos Nivel 2; de lo contrario, Nivel 3 (por ejemplo)
-                Nivel = request.EsCreador ? 2 : 3,
-                Descripcion = request.Descripcion, // Opcional, puede venir del formulario
-                ImagenPerfil = null // Se cargará en otro momento
-            };
-
-            // Aquí podrías guardar también datos extra de creador (p.ej., SocialAccount) en otra tabla o en campos adicionales
-            // según la lógica de tu aplicación.
-
-            _db.Usuarios.Add(nuevoUsuario);
+                var nuevoItem = new Carrito
+                {
+                    IdCliente = idUsuario,
+                    IdProducto = request.IdProducto,
+                    Cantidad = request.Cantidad
+                };
+                _db.Carritos.Add(nuevoItem);
+            }
             await _db.SaveChangesAsync();
-
-            // Retornamos CreatedAtAction (puedes modificar la respuesta según convenga)
-            return CreatedAtAction(nameof(ProductosComprados), new { id = nuevoUsuario.IdUsuario }, nuevoUsuario);
-        }
-     
-        // GET: CarritoController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: CarritoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CarritoController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CarritoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CarritoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CarritoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CarritoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CarritoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Ok(new { message = "Producto agregado al carrito." });
         }
     }
 
-    public class ProductosCompradosRequest
+    public class CarritoRequest
     {
-        public string Nombre { get; set; } = null!;
-        public string Apellido { get; set; } = null!;
-        public string Correo { get; set; } = null!;
-        public string Clave { get; set; } = null!;
-        public bool EsCreador { get; set; }
-        // Campo para la cuenta verificada de una red social (Instagram, X, Twitch, YouTube, etc.)
-        public string? SocialAccount { get; set; }
-        // Opcional, si deseas almacenar alguna descripción adicional (por ejemplo, información del creador)
-        public string? Descripcion { get; set; }
+        public int IdProducto { get; set; }
+        public int Cantidad { get; set; }
     }
 }

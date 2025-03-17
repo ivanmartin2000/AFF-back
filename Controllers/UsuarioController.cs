@@ -11,55 +11,62 @@ namespace AFF_back.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _db;
+
         public UsuariosController(AppDbContext db)
         {
             _db = db;
         }
 
-        // Endpoint para obtener los datos privados del usuario logueado
+        /// <summary>
+        /// Obtiene los datos privados del usuario logueado, como direcciones y tarjetas.
+        /// </summary>
         [Authorize]
         [HttpGet("datos-usuario")]
         public async Task<IActionResult> GetDatosUsuario()
         {
             // Extraer el IdUsuario del token
             if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
-                return Unauthorized("No se pudo extraer el usuario.");
+                return Unauthorized("No se pudo extraer el usuario del token.");
 
             // Datos básicos del usuario
             var usuario = await _db.Usuarios
                 .Where(u => u.IdUsuario == idUsuario)
-                .Select(u => new {
+                .Select(u => new
+                {
                     u.IdUsuario,
-                    NombreCompleto = u.Nombres + " " + u.Apellidos,
-                    u.Correo,
-                    u.ImagenPerfil,
-                    u.Descripcion
+                    NombreCompleto = (u.Nombres + " " + u.Apellidos).Trim(),
+                    Correo = u.Correo ?? string.Empty,
+                    ImagenPerfil = u.ImagenPerfil ?? string.Empty,
+                    Descripcion = u.Descripcion ?? string.Empty
                 })
                 .FirstOrDefaultAsync();
 
             if (usuario == null)
                 return NotFound("Usuario no encontrado.");
 
-            // Obtener direcciones (se pueden extender con joins para traer información de Distrito, Provincia, etc.)
+            // Obtener direcciones
             var direcciones = await _db.DireccionesUsuario
                 .Where(d => d.IdUsuario == idUsuario)
-                .Select(d => new {
+                .Select(d => new
+                {
                     d.IdDireccion,
                     d.Calle,
                     d.Numero,
                     d.IdDistrito
+                    // Podrías incluir joins para traer la descripción del Distrito/Provincia si lo deseas
                 })
                 .ToListAsync();
 
             // Obtener tarjetas
             var tarjetas = await _db.Tarjetas
                 .Where(t => t.IdUsuario == idUsuario)
-                .Select(t => new {
+                .Select(t => new
+                {
                     t.IdTarjeta,
-                    t.NumeroTarjeta,
-                    t.Titular,
+                    NumeroTarjeta = t.NumeroTarjeta ?? string.Empty,
+                    Titular = t.Titular ?? string.Empty,
                     t.FechaExpiracion,
-                    t.TipoTarjeta
+                    TipoTarjeta = t.TipoTarjeta ?? string.Empty
                 })
                 .ToListAsync();
 
@@ -71,20 +78,23 @@ namespace AFF_back.Controllers
             });
         }
 
-        // Endpoint para obtener el perfil público de un usuario
-        // Se accede a través de /api/usuarios/perfil-publico/{id}
+        /// <summary>
+        /// Obtiene el perfil público de un usuario por su Id.
+        /// Incluye datos básicos, subastas activas y ventas activas.
+        /// </summary>
         [HttpGet("perfil-publico/{id}")]
         public async Task<IActionResult> GetPerfilPublico(int id)
         {
             // Datos básicos del usuario
             var usuario = await _db.Usuarios
                 .Where(u => u.IdUsuario == id)
-                .Select(u => new {
+                .Select(u => new
+                {
                     u.IdUsuario,
-                    NombreCompleto = u.Nombres + " " + u.Apellidos,
-                    u.Correo,
-                    u.ImagenPerfil,
-                    u.Descripcion
+                    NombreCompleto = (u.Nombres + " " + u.Apellidos).Trim(),
+                    Correo = u.Correo ?? string.Empty,
+                    ImagenPerfil = u.ImagenPerfil ?? string.Empty,
+                    Descripcion = u.Descripcion ?? string.Empty
                 })
                 .FirstOrDefaultAsync();
 
@@ -97,14 +107,15 @@ namespace AFF_back.Controllers
                             && p.Activo
                             && p.FechaFin.HasValue
                             && p.FechaFin.Value > DateTime.UtcNow)
-                .Select(p => new {
+                .Select(p => new
+                {
                     p.IdProducto,
-                    p.Nombre,
-                    p.Descripcion,
+                    Nombre = p.Nombre ?? string.Empty,
+                    Descripcion = p.Descripcion ?? string.Empty,
                     p.Precio,
                     p.FechaFin,
-                    p.RutaImagen,
-                    p.NombreImagen
+                    RutaImagen = p.RutaImagen ?? string.Empty,
+                    NombreImagen = p.NombreImagen ?? string.Empty
                 })
                 .ToListAsync();
 
@@ -113,14 +124,15 @@ namespace AFF_back.Controllers
                 .Where(p => p.IdUsuario == id
                             && p.Activo
                             && !p.FechaFin.HasValue)
-                .Select(p => new {
+                .Select(p => new
+                {
                     p.IdProducto,
-                    p.Nombre,
-                    p.Descripcion,
+                    Nombre = p.Nombre ?? string.Empty,
+                    Descripcion = p.Descripcion ?? string.Empty,
                     p.Precio,
                     p.FechaRegistro,
-                    p.RutaImagen,
-                    p.NombreImagen
+                    RutaImagen = p.RutaImagen ?? string.Empty,
+                    NombreImagen = p.NombreImagen ?? string.Empty
                 })
                 .ToListAsync();
 

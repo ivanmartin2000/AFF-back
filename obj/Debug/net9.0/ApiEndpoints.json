@@ -43,141 +43,31 @@
   },
   {
     "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Index",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Details",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Create",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Create",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "collection",
-        "Type": "Microsoft.AspNetCore.Http.IFormCollection",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Edit",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Edit",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "collection",
-        "Type": "Microsoft.AspNetCore.Http.IFormCollection",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Delete",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "Delete",
-    "RelativePath": "api/Carrito",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "collection",
-        "Type": "Microsoft.AspNetCore.Http.IFormCollection",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AFF_back.Controllers.CarritoController",
-    "Method": "ProductosComprados",
-    "RelativePath": "api/Carrito/productosComprados",
+    "Method": "AgregarAlCarrito",
+    "RelativePath": "api/Carrito/agregar",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "AFF_back.Controllers.ProductosCompradosRequest",
+        "Type": "AFF_back.Controllers.CarritoRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.CarritoController",
+    "Method": "GetCarritoByUser",
+    "RelativePath": "api/Carrito/usuario/{idUsuario}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -299,6 +189,26 @@
     "ContainingType": "AFF_back.Controllers.SubastasController",
     "Method": "GetProductosSubasta",
     "RelativePath": "api/Subastas/publicados",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.TransaccionesController",
+    "Method": "GetProductosActivos",
+    "RelativePath": "api/transacciones/productos-activos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.TransaccionesController",
+    "Method": "GetSubastasActivas",
+    "RelativePath": "api/transacciones/subastas-activas",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

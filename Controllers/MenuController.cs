@@ -20,27 +20,27 @@ namespace AFF_back.Controllers
         [HttpGet("principal")]
         public async Task<IActionResult> GetMenuPrincipal()
         {
+            // Extraemos la claim "IdUsuario"
             var idClaim = User.FindFirst("IdUsuario")?.Value;
-            // Log temporal (puedes usar un logger o retornar este dato para depuración)
             System.Diagnostics.Debug.WriteLine("Claim IdUsuario: " + idClaim);
 
-            // Extraemos el IdUsuario del token (asegúrate de que la claim se llame exactamente "IdUsuario")
-            if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
+            if (!int.TryParse(idClaim, out int idUsuario))
             {
                 return Unauthorized("No se pudo extraer el usuario.");
             }
 
-            // Obtener los favoritos del usuario logueado usando la entidad UsuarioFavoritos
+            // Obtener los favoritos del usuario logueado
             var favoritos = await _db.UsuarioFavoritos
                 .Where(fav => fav.IdUsuario == idUsuario)
                 .Include(fav => fav.Vendedor)
                 .Select(fav => new
                 {
-                    vendedorId = fav.Vendedor.IdUsuario,
+                    // Usamos la propiedad "idUsuario" para identificar al vendedor
+                    idUsuario = fav.Vendedor.IdUsuario,
                     nombre = fav.Vendedor.Nombres + " " + fav.Vendedor.Apellidos,
-                    imagenPerfil = fav.Vendedor.ImagenPerfil,
-                    descripcion = fav.Vendedor.Descripcion,
-                    // Datos del último producto en venta del vendedor
+                    imagenPerfil = fav.Vendedor.ImagenPerfil ?? string.Empty,
+                    descripcion = fav.Vendedor.Descripcion ?? string.Empty,
+                    // Último producto en venta
                     productoVenta = _db.Productos
                         .Where(p => p.IdUsuario == fav.Vendedor.IdUsuario && p.Activo)
                         .OrderByDescending(p => p.FechaRegistro)
@@ -52,7 +52,7 @@ namespace AFF_back.Controllers
                             p.RutaImagen,
                             p.NombreImagen
                         }).FirstOrDefault(),
-                    // Datos del último producto en subasta del vendedor, manejando FechaFin de forma segura
+                    // Último producto en subasta, manejando FechaFin de forma segura
                     productoSubasta = _db.Productos
                         .Where(p => p.IdUsuario == fav.Vendedor.IdUsuario && p.Activo)
                         .OrderByDescending(p => p.FechaRegistro)
@@ -65,19 +65,20 @@ namespace AFF_back.Controllers
                             p.NombreImagen,
                             FechaFin = p.FechaFin.HasValue ? p.FechaFin.Value : (DateTime?)null
                         }).FirstOrDefault()
-                }).ToListAsync();
+                })
+                .ToListAsync();
 
-            // Extraer los Ids de vendedores favoritos para excluirlos de sugerencias
-            var favoritosIds = favoritos.Select(f => f.vendedorId).ToList();
-            // Obtener sugerencias: vendedores de Nivel=2 que no sean el usuario logueado y que no estén en favoritos
+            // Extraer los idUsuario de los vendedores favoritos para excluirlos de sugerencias
+            var favoritosIds = favoritos.Select(f => f.idUsuario).ToList();
+            // Obtener sugerencias: vendedores de Nivel=2 (vendedores) que no sean el usuario logueado ni ya estén en favoritos
             var sugerencias = await _db.Usuarios
                 .Where(u => u.IdUsuario != idUsuario && u.Nivel == 2 && !favoritosIds.Contains(u.IdUsuario))
                 .OrderBy(r => Guid.NewGuid())
                 .Take(3)
                 .Select(u => new {
-                    vendedorId = u.IdUsuario,
+                    idUsuario = u.IdUsuario,
                     nombre = u.Nombres + " " + u.Apellidos,
-                    imagenPerfil = u.ImagenPerfil
+                    imagenPerfil = u.ImagenPerfil ?? string.Empty
                 })
                 .ToListAsync();
 
@@ -106,6 +107,5 @@ namespace AFF_back.Controllers
 
             return Ok(categorias);
         }
-
     }
 }
