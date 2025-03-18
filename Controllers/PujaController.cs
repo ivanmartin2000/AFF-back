@@ -29,6 +29,10 @@ namespace AFF_back.Controllers
             if (producto == null)
                 return BadRequest("Producto no encontrado o inactivo.");
 
+            // Verificar que el producto esté en una subasta (TipoPublicacion debe ser "Subasta")
+            if (producto.TipoPublicacion != "subasta")
+                return BadRequest("El producto no está en una subasta.");
+
             // Verificar que el usuario no puje en su propio producto
             if (producto.IdUsuario == idUsuario)
                 return BadRequest("No puedes ofertar en tu propio producto.");
@@ -37,20 +41,57 @@ namespace AFF_back.Controllers
             if (!producto.FechaFin.HasValue || producto.FechaFin.Value < DateTime.UtcNow)
                 return BadRequest("La subasta ha finalizado.");
 
-            // Crear la puja (asumiendo que tienes la entidad Puja)
+            // Verificar que la puja es mayor que el monto actual de la puja (si existe)
+            var pujaActual = await _db.Pujas
+                .Where(p => p.IdProducto == request.IdProducto)
+                .OrderByDescending(p => p.Monto)
+                .FirstOrDefaultAsync();
+
+            if (pujaActual != null && request.Monto <= pujaActual.Monto)
+                return BadRequest("La puja debe ser mayor que la puja actual.");
+
+            // Crear la puja
             var puja = new Puja
             {
-                IdSubasta = request.IdSubasta,  // Asumiendo que tu producto subastado se relaciona con una subasta
+                IdProducto = request.IdProducto,
                 IdUsuario = idUsuario,
                 Monto = request.Monto,
-                FechaPuja = DateTime.UtcNow
+                FechaPuja = DateTime.UtcNow,
+                IdUsuarioComprador = idUsuario
             };
 
-            _db.Pujas.Add(puja);
-            await _db.SaveChangesAsync();
+            try
+            {
+                // Insertamos la nueva puja en la base de datos
+                _db.Pujas.Add(puja);
+
+                // Actualizamos el precio del producto con el monto de la nueva puja
+                producto.Precio = request.Monto; // Actualizamos el precio con la nueva puja
+
+                // Verificamos si la subasta ha llegado a su fin
+                if (producto.FechaFin.HasValue && producto.FechaFin.Value <= DateTime.UtcNow)
+                {
+                    // Actualizamos el producto para marcar la subasta como finalizada
+                    producto.TipoPublicacion = "Vendido";  // O cualquier otro tipo de publicación
+                    producto.Activo = false;  // Hacemos el producto inactivo
+                }
+
+                // Guardamos los cambios tanto de la puja como del producto
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Capturamos la excepción para ver el detalle del error
+                Console.WriteLine($"Error al guardar la puja: {ex.Message}");
+                return StatusCode(500, $"Error al guardar la puja: {ex.InnerException?.Message}");
+            }
 
             return Ok(new { message = "Puja realizada con éxito" });
         }
+
+
+
+
     }
 
     // Modelo de solicitud para la puja

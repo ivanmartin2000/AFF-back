@@ -167,13 +167,28 @@ public class AppDbContext : DbContext
         {
             entity.ToTable("PUJA");
             entity.HasKey(e => e.IdPuja);
+
+            // Configuración de las propiedades
             entity.Property(e => e.Monto).HasPrecision(18, 2);
             entity.Property(e => e.FechaPuja).HasColumnType("datetime");
 
-            entity.HasOne(e => e.UsuarioComprador)
-                  .WithMany()
-                  .HasForeignKey(e => e.IdUsuarioComprador)
-                  .OnDelete(DeleteBehavior.Restrict);
+            // Relación con el producto (IdProducto)
+            entity.HasOne(e => e.Producto)  // Relación con la entidad Producto
+                .WithMany()  // El producto puede tener muchas pujas
+                .HasForeignKey(e => e.IdProducto)  // Usamos la propiedad IdProducto para la clave foránea
+                .OnDelete(DeleteBehavior.Restrict);  // No eliminar las pujas si el producto se elimina
+
+            // Relación con el usuario que realiza la puja (IdUsuario)
+            entity.HasOne(e => e.Usuario)  // Relación con la entidad Usuario
+                .WithMany()  // Un usuario puede hacer muchas pujas
+                .HasForeignKey(e => e.IdUsuario)  // Usamos la propiedad IdUsuario para la clave foránea
+                .OnDelete(DeleteBehavior.Cascade);  // Si un usuario es eliminado, eliminar todas sus pujas
+
+            // Relación con el usuario comprador (IdUsuarioComprador)
+            entity.HasOne(e => e.UsuarioComprador)  // Relación con la entidad Usuario (quien compra, si aplica)
+                .WithMany()  // Un comprador puede tener muchas pujas
+                .HasForeignKey(e => e.IdUsuarioComprador)  // Usamos la propiedad IdUsuarioComprador para la clave foránea
+                .OnDelete(DeleteBehavior.Restrict);  // Evitar eliminar las pujas si el usuario comprador es eliminado
         });
         // ----------------- MARCA -----------------
         modelBuilder.Entity<Marca>(entity =>

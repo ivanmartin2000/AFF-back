@@ -21,7 +21,7 @@ namespace AFF_back.Controllers
         public async Task<IActionResult> GetCarritoByUser(int idUsuario)
         {
             var items = await _db.Carritos
-                .Where(c => c.IdCliente == idUsuario)
+                .Where(c => c.IdUsuario == idUsuario)  // Cambio aquí de IdCliente a IdUsuario
                 .Select(c => new
                 {
                     c.IdCarrito,
@@ -40,7 +40,7 @@ namespace AFF_back.Controllers
             if (!int.TryParse(User.FindFirst("IdUsuario")?.Value, out int idUsuario))
                 return Unauthorized("No se pudo extraer el usuario.");
 
-            var existingItem = await _db.Carritos.FirstOrDefaultAsync(c => c.IdCliente == idUsuario && c.IdProducto == request.IdProducto);
+            var existingItem = await _db.Carritos.FirstOrDefaultAsync(c => c.IdUsuario == idUsuario && c.IdProducto == request.IdProducto);  // Cambio aquí de IdCliente a IdUsuario
             if (existingItem != null)
             {
                 existingItem.Cantidad += request.Cantidad;
@@ -49,7 +49,7 @@ namespace AFF_back.Controllers
             {
                 var nuevoItem = new Carrito
                 {
-                    IdCliente = idUsuario,
+                    IdUsuario = idUsuario,  // Cambio aquí de IdCliente a IdUsuario
                     IdProducto = request.IdProducto,
                     Cantidad = request.Cantidad
                 };

@@ -12,27 +12,61 @@ namespace AFF_back.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PUJA",
-                columns: table => new
-                {
-                    IdPuja = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdSubasta = table.Column<int>(type: "int", nullable: true),
-                    IdUsuario = table.Column<int>(type: "int", nullable: true),
-                    Monto = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    FechaPuja = table.Column<DateTime>(type: "datetime", nullable: true),
-                    IdUsuarioComprador = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PUJA", x => x.IdPuja);
-                    table.ForeignKey(
-                        name: "FK_PUJA_USUARIO_IdUsuarioComprador",
-                        column: x => x.IdUsuarioComprador,
-                        principalTable: "USUARIO",
-                        principalColumn: "IdUsuario",
-                        onDelete: ReferentialAction.Restrict);
-                });
+           name: "PUJA",
+           columns: table => new
+           {
+               IdPuja = table.Column<int>(type: "int", nullable: false)
+                   .Annotation("SqlServer:Identity", "1, 1"),
+               IdProducto = table.Column<int>(type: "int", nullable: true), // Relación con Producto
+               IdUsuario = table.Column<int>(type: "int", nullable: false), // Relación con Usuario que hace la puja
+               Monto = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+               FechaPuja = table.Column<DateTime>(type: "datetime", nullable: false), // No nullable
+               IdUsuarioComprador = table.Column<int>(type: "int", nullable: true) // Relación con Usuario comprador (si aplica)
+           },
+           constraints: table =>
+           {
+               table.PrimaryKey("PK_PUJA", x => x.IdPuja);
+
+               // Relación con Producto
+               table.ForeignKey(
+                   name: "FK_PUJA_PRODUCTO_IdProducto",
+                   column: x => x.IdProducto,
+                   principalTable: "PRODUCTO",
+                   principalColumn: "IdProducto",
+                   onDelete: ReferentialAction.Restrict); // Restrict para evitar eliminación accidental
+
+               // Relación con Usuario (quien realiza la puja)
+               table.ForeignKey(
+                   name: "FK_PUJA_USUARIO_IdUsuario",
+                   column: x => x.IdUsuario,
+                   principalTable: "USUARIO",
+                   principalColumn: "IdUsuario",
+                   onDelete: ReferentialAction.Cascade); // Si se elimina un usuario, eliminar las pujas asociadas
+
+               // Relación con Usuario Comprador (si corresponde)
+               table.ForeignKey(
+                   name: "FK_PUJA_USUARIO_IdUsuarioComprador",
+                   column: x => x.IdUsuarioComprador,
+                   principalTable: "USUARIO",
+                   principalColumn: "IdUsuario",
+                   onDelete: ReferentialAction.Restrict); // Restrict para evitar eliminación accidental
+           });
+
+            // Agregar los índices para mejorar la búsqueda
+            migrationBuilder.CreateIndex(
+                name: "IX_PUJA_IdProducto",
+                table: "PUJA",
+                column: "IdProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PUJA_IdUsuario",
+                table: "PUJA",
+                column: "IdUsuario");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PUJA_IdUsuarioComprador",
+                table: "PUJA",
+                column: "IdUsuarioComprador");
 
             migrationBuilder.CreateTable(
                 name: "VENTA",
