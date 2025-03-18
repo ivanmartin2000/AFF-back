@@ -5,7 +5,7 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    // DbSet existentes
+    // ------------------ DBSET EXISTENTES ------------------
     public DbSet<Venta> Ventas { get; set; } = null!;
     public DbSet<DetalleVenta> DetalleVentas { get; set; } = null!;
     public DbSet<Usuario> Usuarios { get; set; } = null!;
@@ -16,11 +16,9 @@ public class AppDbContext : DbContext
     public DbSet<Tarjeta> Tarjetas { get; set; } = null!;
     public DbSet<DireccionUsuario> DireccionesUsuario { get; set; } = null!;
     public DbSet<Puja> Pujas { get; set; } = null!;
-
-    // Nuevo DbSet para envíos
-    public DbSet<Envio> Envios { get; set; } = null!;
     public DbSet<Carrito> Carritos { get; set; } = null!;
     public DbSet<Marca> Marcas { get; set; } = null!;
+    public DbSet<Envio> Envios { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,7 +27,7 @@ public class AppDbContext : DbContext
         {
             entity.ToTable("CARRITO");
             entity.HasKey(e => e.IdCarrito);
-            // Aquí podrías agregar propiedades adicionales o configuraciones de columna si lo requieres.
+            // Ajusta relaciones si tuvieras IdUsuario en Carrito en vez de IdCliente
         });
 
         base.OnModelCreating(modelBuilder);
@@ -137,9 +135,9 @@ public class AppDbContext : DbContext
         {
             entity.ToTable("VENTA");
             entity.HasKey(e => e.IdVenta);
-            // Si IdCliente referencia USUARIO:
+            // Si IdCliente referencia la tabla USUARIO:
             entity.HasOne(e => e.Usuario)
-                  .WithMany()
+                  .WithMany() // o .WithMany(u => u.VentasRealizadas) si quieres la relación
                   .HasForeignKey(e => e.IdCliente)
                   .OnDelete(DeleteBehavior.Restrict);
         });
@@ -157,7 +155,7 @@ public class AppDbContext : DbContext
                   .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.Producto)
-                  .WithMany() // Puedes definir una colección en Producto si lo necesitas
+                  .WithMany() // define si quieres la colección en Producto
                   .HasForeignKey(e => e.IdProducto)
                   .OnDelete(DeleteBehavior.Restrict);
         });
@@ -168,28 +166,28 @@ public class AppDbContext : DbContext
             entity.ToTable("PUJA");
             entity.HasKey(e => e.IdPuja);
 
-            // Configuración de las propiedades
             entity.Property(e => e.Monto).HasPrecision(18, 2);
             entity.Property(e => e.FechaPuja).HasColumnType("datetime");
 
             // Relación con el producto (IdProducto)
-            entity.HasOne(e => e.Producto)  // Relación con la entidad Producto
-                .WithMany()  // El producto puede tener muchas pujas
-                .HasForeignKey(e => e.IdProducto)  // Usamos la propiedad IdProducto para la clave foránea
-                .OnDelete(DeleteBehavior.Restrict);  // No eliminar las pujas si el producto se elimina
+            entity.HasOne(e => e.Producto)
+                  .WithMany() // un producto puede tener muchas pujas
+                  .HasForeignKey(e => e.IdProducto)
+                  .OnDelete(DeleteBehavior.Restrict);
 
-            // Relación con el usuario que realiza la puja (IdUsuario)
-            entity.HasOne(e => e.Usuario)  // Relación con la entidad Usuario
-                .WithMany()  // Un usuario puede hacer muchas pujas
-                .HasForeignKey(e => e.IdUsuario)  // Usamos la propiedad IdUsuario para la clave foránea
-                .OnDelete(DeleteBehavior.Cascade);  // Si un usuario es eliminado, eliminar todas sus pujas
+            // Relación con el usuario que realiza la puja
+            entity.HasOne(e => e.Usuario)
+                  .WithMany() // un usuario puede hacer muchas pujas
+                  .HasForeignKey(e => e.IdUsuario)
+                  .OnDelete(DeleteBehavior.Cascade);
 
-            // Relación con el usuario comprador (IdUsuarioComprador)
-            entity.HasOne(e => e.UsuarioComprador)  // Relación con la entidad Usuario (quien compra, si aplica)
-                .WithMany()  // Un comprador puede tener muchas pujas
-                .HasForeignKey(e => e.IdUsuarioComprador)  // Usamos la propiedad IdUsuarioComprador para la clave foránea
-                .OnDelete(DeleteBehavior.Restrict);  // Evitar eliminar las pujas si el usuario comprador es eliminado
+            // Relación con el usuario comprador
+            entity.HasOne(e => e.UsuarioComprador)
+                  .WithMany()
+                  .HasForeignKey(e => e.IdUsuarioComprador)
+                  .OnDelete(DeleteBehavior.Restrict);
         });
+
         // ----------------- MARCA -----------------
         modelBuilder.Entity<Marca>(entity =>
         {
@@ -202,6 +200,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.FechaRegistro)
                   .HasColumnType("datetime");
         });
+
         // ----------------- ENVIO -----------------
         modelBuilder.Entity<Envio>(entity =>
         {
@@ -211,7 +210,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.FechaRegistro).HasDefaultValueSql("GETDATE()");
 
             entity.HasOne(e => e.Venta)
-                  .WithOne() // Se asume que cada venta tiene un único envío
+                  .WithOne() // se asume que cada venta tiene un único envío
                   .HasForeignKey<Envio>(e => e.IdVenta)
                   .OnDelete(DeleteBehavior.Restrict);
         });

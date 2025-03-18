@@ -114,6 +114,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AFF_back.Controllers.LayoutController",
+    "Method": "Buscar",
+    "RelativePath": "api/Layout/buscar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AFF_back.Controllers.LayoutController",
+    "Method": "GetUsuarioLayout",
+    "RelativePath": "api/Layout/usuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MarcasController",
     "Method": "CrearMarca",
     "RelativePath": "api/Marcas",
