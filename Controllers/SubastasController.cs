@@ -50,6 +50,36 @@ namespace AFF_back.Controllers
             return Ok(productosSubasta);
         }
 
+        [HttpGet("por-usuario/{idUsuario}")]
+        public async Task<IActionResult> GetProductosSubastaPorUsuario(int idUsuario)
+        {
+            // Consulta: Selecciona productos en subasta (Activo, FechaFin futura, IdUsuario)
+            var productosSubasta = await _db.Productos
+                .Where(p => p.Activo
+                            && p.FechaFin.HasValue
+                            && p.FechaFin.Value > DateTime.UtcNow
+                            && p.IdUsuario == idUsuario)
+                .Select(p => new
+                {
+                    idProducto = p.IdProducto,
+                    nombre = p.Nombre ?? string.Empty,
+                    descripcion = p.Descripcion ?? string.Empty,
+                    precio = p.Precio,
+                    fechaFin = p.FechaFin,    // Se asume que no es null por el filtro HasValue
+                    rutaImagen = p.RutaImagen ?? string.Empty,
+                    nombreImagen = p.NombreImagen ?? string.Empty
+                })
+                .ToListAsync();
+
+            if (productosSubasta == null || productosSubasta.Count == 0)
+            {
+                return NotFound("No se encontraron productos en subasta para este usuario.");
+            }
+
+            return Ok(productosSubasta);
+        }
+
+
         /// <summary>
         /// Cancela subastas que han expirado (FechaFin < ahora) y siguen Activo = true.
         /// Marca el producto como inactivo y limpia FechaFin.

@@ -18,6 +18,44 @@ namespace AFF_back.Controllers
         }
 
         /// <summary>
+        /// Obtiene el ID del usuario autenticado desde el token JWT.
+        /// </summary>
+        [Authorize]
+        [HttpGet("mi-id")]
+        public async Task<IActionResult> GetUserIdByEmail()
+        {
+            try
+            {
+                // Obtener el correo electrónico del usuario desde el token
+                var userEmailClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userEmailClaim == null)
+                {
+                    return Unauthorized(new { message = "No se encontró el correo electrónico en el token." });
+                }
+
+                string userEmail = userEmailClaim.Value; // Obtener el correo electrónico del claim
+
+                // Buscar el usuario en la base de datos por su correo electrónico
+                var usuario = await _db.Usuarios
+                    .Where(u => u.Correo == userEmail)
+                    .FirstOrDefaultAsync();
+
+                if (usuario == null)
+                {
+                    return NotFound(new { message = "Usuario no encontrado." });
+                }
+
+                // Devolver el ID del usuario
+                return Ok(usuario.IdUsuario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al obtener el ID del usuario", error = ex.Message });
+            }
+        }
+
+
+        /// <summary>
         /// Obtiene los datos privados del usuario logueado, como direcciones y tarjetas.
         /// </summary>
         [Authorize]
@@ -53,7 +91,6 @@ namespace AFF_back.Controllers
                     d.Calle,
                     d.Numero,
                     d.IdDistrito
-                    // Podrías incluir joins para traer la descripción del Distrito/Provincia si lo deseas
                 })
                 .ToListAsync();
 
@@ -143,5 +180,56 @@ namespace AFF_back.Controllers
                 Ventas = ventas
             });
         }
+
+        // Endpoint para obtener el perfil del usuario
+        [HttpGet("perfil-usuario/{id}")]
+        public async Task<IActionResult> GetPerfilUsuario(int id)
+        {
+            var usuario = await _db.Usuarios
+                .Where(u => u.IdUsuario == id)
+                .Select(u => new
+                {
+                    u.IdUsuario,
+                    u.Nombres,
+                    u.Apellidos,
+                    u.Correo,
+                    u.ImagenPerfil,
+                    u.Descripcion
+                })
+                .FirstOrDefaultAsync();
+
+            if (usuario == null)
+                return NotFound("Usuario no encontrado.");
+
+            var direcciones = await _db.DireccionesUsuario
+                .Where(d => d.IdUsuario == id)
+                .Select(d => new {
+                    d.IdDireccion,
+                    d.Calle,
+                    d.Numero,
+                    d.IdDistrito,
+                    label = $"{d.Calle} {d.Numero}, {d.IdDistrito}"  // Agregamos la propiedad 'label' para que coincida con el frontend
+                })
+                .ToListAsync();
+
+            var tarjetas = await _db.Tarjetas
+                .Where(t => t.IdUsuario == id)
+                .Select(t => new {
+                    t.IdTarjeta,
+                    t.NumeroTarjeta,
+                    t.Titular,
+                    t.FechaExpiracion,
+                    t.TipoTarjeta
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                Usuario = usuario,
+                Direcciones = direcciones,
+                Tarjetas = tarjetas
+            });
+        }
+
     }
 }

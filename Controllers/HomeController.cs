@@ -125,5 +125,9 @@ namespace AFF_back.Controllers
                 Ventas = ventas
             });
         }
+
+       
+
+
     }
 }
